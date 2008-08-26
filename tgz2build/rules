@@ -15,7 +15,7 @@ $(STAMPDIR)/stamp-setup:
 configure: $(STAMPDIR)/stamp-configure
 	#we need only the runtime libs.
 	cd gettext-runtime
-	./configure $(CONFIGURE_OPTS)
+	./configure $(CONFIGURE_OPTS) --with-libiconv-prefix=/opt/syslog-ng/
 	touch $@
 
 $(STAMPDIR)/stamp-configure: setup
