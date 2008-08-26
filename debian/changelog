@@ -1,4 +1,4 @@
-libiconv (1.12-1syslogng30) syslogng30; urgency=low
+gettext (0.17-1syslogng30) syslogng30; urgency=low
 
   * Initial tgz2build package. 
 
