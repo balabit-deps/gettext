@@ -1,0 +1,5 @@
+libiconv (1.12-1syslogng30) syslogng30; urgency=low
+
+  * Initial tgz2build package. 
+
+ -- ZorpOS Maintainers <zorpos@balabit.com>  Tue, 26 Aug 2008 16:22:59 +0200
