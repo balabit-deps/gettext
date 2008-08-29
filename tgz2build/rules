@@ -1,11 +1,11 @@
 #!/usr/local/bin/make -f                                                                                                                                           
 STAMPDIR=tgz2build/stamps
 
-CONFIGURE_OPTS := --prefix=$(ZBS_PREFIX)
+CONFIGURE_OPTS := --prefix=$(ZBS_PREFIX) --with-libiconv-prefix=$(ZBS_PREFIX)/ --with-libintl-prefix=$(ZBS_PREFIX)/
 
 all: binary
 
-binary: setup configure build install
+binary: $(STAMPDIR)/stamp-setup $(STAMPDIR)/stamp-configure $(STAMPDIR)/stamp-build $(STAMPDIR)/stamp-install
 
 setup:  $(STAMPDIR)/stamp-setup
 $(STAMPDIR)/stamp-setup:
@@ -13,22 +13,22 @@ $(STAMPDIR)/stamp-setup:
 	touch $@
 
 configure: $(STAMPDIR)/stamp-configure
+$(STAMPDIR)/stamp-configure: $(STAMPDIR)/stamp-setup
 	#we need only the runtime libs.
-	cd gettext-runtime
-	./configure $(CONFIGURE_OPTS) --with-libiconv-prefix=/opt/syslog-ng/
+	cd gettext-runtime && LDFLAGS="-Wl,-brtl $(LDFLAGS)" ./configure $(CONFIGURE_OPTS)
 	touch $@
 
-$(STAMPDIR)/stamp-configure: setup
 
 build:  $(STAMPDIR)/stamp-build
-$(STAMPDIR)/stamp-build: configure
-	$(MAKE)
+$(STAMPDIR)/stamp-build: $(STAMPDIR)/stamp-configure
+	#build only libintl we don't need the other stuffs.
+	cd gettext-runtime/intl && $(MAKE)
 	touch $@
 
 install: $(STAMPDIR)/stamp-install
-$(STAMPDIR)/stamp-install: build
+$(STAMPDIR)/stamp-install: $(STAMPDIR)/stamp-build
 	rm -rf $(ZBS_STAGE_DIR) || true
-	$(MAKE) install DESTDIR=$(ZBS_STAGE_DIR)
+	cd gettext-runtime/intl && $(MAKE) install DESTDIR=$(ZBS_STAGE_DIR)
 	touch $@
 clean:
 	rm -rf tgz2build/stamps || true
