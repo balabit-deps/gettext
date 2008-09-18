@@ -18,6 +18,7 @@ dnl Process this file with autoconf to produce a configure script.
 
 AC_PREREQ(2.57)
 AC_INIT
+AC_CONFIG_MACRO_DIR([m4])
 AC_CONFIG_SRCDIR(tests/rpath-1a)
 AC_CONFIG_AUX_DIR(../build-aux)
 . $srcdir/../version.sh

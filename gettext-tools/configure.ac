@@ -18,6 +18,7 @@ dnl Process this file with autoconf to produce a configure script.
 
 AC_PREREQ([2.59])
 AC_INIT
+AC_CONFIG_MACRO_DIR([m4])
 AC_CONFIG_SRCDIR(src/msgfmt.c)
 AC_CONFIG_AUX_DIR(../build-aux)
 . $srcdir/../version.sh
