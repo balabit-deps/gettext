@@ -36,8 +36,8 @@
 # Usage from a released tarball:             ./autogen.sh --quick --skip-gnulib
 # This does not use a gnulib checkout.
 
-quick=false
-skip_gnulib=false
+quick=true
+skip_gnulib=true
 while :; do
   case "$1" in
     --quick) quick=true; shift;;
@@ -248,38 +248,47 @@ if test $skip_gnulib = false; then
       --import $GNULIB_MODULES_LIBGETTEXTPO $GNULIB_MODULES_LIBGETTEXTPO_OTHER
   fi
 fi
-
+M4PATH=/opt/libtool/share/aclocal/
+libtoolize -c -i -f
+echo autoconf-lib-link
 (cd autoconf-lib-link
- ../build-aux/fixaclocal aclocal -I m4 -I ../m4
+ ../build-aux/fixaclocal aclocal -I $M4PATH -I m4 -I ../m4
  autoconf
  automake
 )
 
+echo gettext-runtime
 (cd gettext-runtime
- ../build-aux/fixaclocal aclocal -I m4 -I ../autoconf-lib-link/m4 -I ../m4 -I gnulib-m4
+ libtoolize -c -i -f
+ ../build-aux/fixaclocal aclocal -I $M4PATH -I m4 -I ../autoconf-lib-link/m4 -I ../m4 -I gnulib-m4
  autoconf
  autoheader && touch config.h.in
  automake
 )
 
+echo  gettext-runtime/libasprintf
+set -x
 (cd gettext-runtime/libasprintf
- ../../build-aux/fixaclocal aclocal -I ../../m4 -I ../m4
+ ../../build-aux/fixaclocal aclocal -I $M4PATH -I ../../m4 -I ../m4
  autoconf
  autoheader && touch config.h.in
  automake
 )
+set +x
 
 cp -p gettext-runtime/ABOUT-NLS gettext-tools/ABOUT-NLS
 
+echo gettext-tools
 (cd gettext-tools
- ../build-aux/fixaclocal aclocal -I m4 -I ../gettext-runtime/m4 -I ../autoconf-lib-link/m4 -I ../m4 -I gnulib-m4 -I libgettextpo/gnulib-m4
+ ../build-aux/fixaclocal aclocal -I $M4PATH -I m4 -I ../gettext-runtime/m4 -I ../autoconf-lib-link/m4 -I ../m4 -I gnulib-m4 -I libgettextpo/gnulib-m4
  autoconf
  autoheader && touch config.h.in
  automake
 )
 
+echo gettext-tools/examples
 (cd gettext-tools/examples
- ../../build-aux/fixaclocal aclocal -I ../../gettext-runtime/m4 -I ../../m4
+ ../../build-aux/fixaclocal aclocal -I $M4PATH -I ../../gettext-runtime/m4 -I ../../m4
  autoconf
  automake
  # Rebuilding the examples PO files is only rarely needed.
@@ -288,7 +297,7 @@ cp -p gettext-runtime/ABOUT-NLS gettext-tools/ABOUT-NLS
  fi
 )
 
-build-aux/fixaclocal aclocal
+build-aux/fixaclocal aclocal -I $M4PATH
 autoconf
 automake
 
