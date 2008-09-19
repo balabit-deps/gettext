@@ -1,1 +1,4 @@
 opt/syslog-ng/include
+opt/syslog-ng/lib/*.so
+opt/syslog-ng/lib/*.la
+

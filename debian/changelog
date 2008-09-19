@@ -1,3 +1,10 @@
+gettext (0.17-2syslogng30) syslogng30; urgency=low
+
+  * Bumped version to 0.17-2syslogng30.
+  * Re-configured autoconfuse to use libtool 2.x.
+
+ -- Tamas Pal <folti@balabit.com>  Fri, 19 Sep 2008 13:47:07 +0200
+
 gettext (0.17-1syslogng30) syslogng30; urgency=low
 
   * Initial tgz2build package. 
