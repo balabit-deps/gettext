@@ -1,3 +1,10 @@
+gettext (0.17-3syslogng30) syslogng30; urgency=low
+
+  * Bumped version to 0.17-3syslogng30
+  * Use bash for the configure script in tgz2build/rules
+
+ -- Balazs Scheidler <bazsi@balabit.com>  Sat, 11 Jul 2009 16:41:46 +0200
+
 gettext (0.17-2syslogng30) syslogng30; urgency=low
 
   * Bumped version to 0.17-2syslogng30.
