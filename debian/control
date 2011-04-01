@@ -3,6 +3,7 @@ Section: utils
 Priority: optional
 Maintainer: ZorpOS Maintainers <zorpos@balabit.com>
 Standards-Version: 1.12
+Build-Depends: libiconv, libiconv-dev
 
 Package: gettext
 Section: libs
