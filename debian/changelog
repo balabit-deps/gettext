@@ -1,3 +1,10 @@
+gettext (0.17-3syslogng41.1) syslogngdeps30; urgency=low
+
+  * re-release for syslog-ng-deps-3.0
+  * builder fixes
+
+ -- Tamas Pal <folti@balabit.com>  Thu, 14 Apr 2011 18:44:41 +0200
+
 gettext (0.17-3syslogng30) syslogng30; urgency=low
 
   * Bumped version to 0.17-3syslogng30
