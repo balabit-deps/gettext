@@ -1,5 +1,10 @@
 #!/bin/sh -e
 
+if [ -z "$MAKE" ]; then
+	MAKE=make
+fi
+UNAME_S=`uname -s`
+
 cmd=$1
 shift
 case "$cmd" in
@@ -9,9 +14,21 @@ case "$cmd" in
     echo "No need to bootstrap"
 
     ;;
-  configure|make)
-    echo "ZWA local compilation not supported, please use the system supplied gettext"
-    exit 0
+  configure)
+    if [ "$UNAME_S" != "Darwin" ]; then
+      echo "ZWA local compilation not needed on this platform, using the system's gettext."
+      exit 0
+	else
+		OPTS="--with-included-gettext --disable-csharp --disable-rpath --disable-libasprintf --disable-static"
+    fi
+	(cd gettext-runtime && ./configure $@ $OPTS)
+    ;;
+  make)
+    if [ "$UNAME_S" != "Darwin" ]; then
+      echo "ZWA local compilation not needed on this platform, using the system's gettext."
+      exit 0
+    fi
+	(cd gettext-runtime/intl && $MAKE $@)
     ;;
   *)
     echo "Unknown command: $cmd"
@@ -20,4 +37,4 @@ case "$cmd" in
 esac
 exit 0
 
-# vim: ts=2 sw=2 expandtab
+#vim: ts=2 sw=2 expandtab
