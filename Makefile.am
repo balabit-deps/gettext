@@ -18,6 +18,7 @@
 
 AUTOMAKE_OPTIONS = 1.5 gnu no-dependencies
 ACLOCAL = build-aux/fixaclocal @ACLOCAL@
+ACLOCAL_AMFLAGS = -I m4
 
 SUBDIRS = gnulib-local gettext-runtime gettext-tools autoconf-lib-link
 
