@@ -3,28 +3,28 @@
 if [ -z "$MAKE" ]; then
 	MAKE=make
 fi
-UNAME_S=`uname -s`
-
 cmd=$1
 shift
 case "$cmd" in
   build-exclude-list|dist-exclude-list|prepare-dist)
     ;;
   bootstrap)
-    echo "No need to bootstrap"
-
+	./autogen.sh
+	# fix old and broken libtools, which can't recognise 64 bit windows libs and dlls.
+	find -name libtool -o -name ltmain.sh | xargs sed -i -e "s,'file format pe-i386.*\?','file format \(pei\*-i386\(\.\*architecture: i386\)\?|pe-arm-wince|pe-x86-64\)',"
     ;;
   configure)
-    if [ "$UNAME_S" != "Darwin" ]; then
+    if [ "$ZBS_BUILDER_TYPE" != "mingw" ]; then
       echo "ZWA local compilation not needed on this platform, using the system's gettext."
       exit 0
 	else
-		OPTS="--with-included-gettext --disable-csharp --disable-rpath --disable-libasprintf --disable-static"
+		OPTS="--with-included-gettext --disable-csharp --disable-rpath --disable-libasprintf --disable-static --enable-threads=posix"
     fi
+	set -x
 	(cd gettext-runtime && ./configure $@ $OPTS)
     ;;
   make)
-    if [ "$UNAME_S" != "Darwin" ]; then
+    if [ "$ZBS_BUILDER_TYPE" != "mingw" ]; then
       echo "ZWA local compilation not needed on this platform, using the system's gettext."
       exit 0
     fi
