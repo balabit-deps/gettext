@@ -1,5 +1,6 @@
-#!/bin/sh -e
+#!/bin/sh -ex
 
+pwd
 if [ -z "$MAKE" ]; then
 	MAKE=make
 fi
@@ -9,9 +10,9 @@ case "$cmd" in
   build-exclude-list|dist-exclude-list|prepare-dist)
     ;;
   bootstrap)
-	./autogen.sh
-	# fix old and broken libtools, which can't recognise 64 bit windows libs and dlls.
-	find -name libtool -o -name ltmain.sh | xargs sed -i -e "s,'file format pe-i386.*\?','file format \(pei\*-i386\(\.\*architecture: i386\)\?|pe-arm-wince|pe-x86-64\)',"
+    ./autogen.sh
+    # fix old and broken libtools, which can't recognise 64 bit windows libs and dlls.
+    find -name libtool -o -name ltmain.sh | xargs sed -i -e "s,'file format pe-i386.*\?','file format \(pei\*-i386\(\.\*architecture: i386\)\?|pe-arm-wince|pe-x86-64\)'," -e 's,cmd \/\/c,,'
     ;;
   configure)
     if [ "$ZBS_BUILDER_TYPE" != "mingw" ]; then
