@@ -1,3 +1,10 @@
+gettext (0.17-3syslogng50.1) syslogngdeps50; urgency=low
+
+  * release for syslog-ng-deps-5.0
+  * builder fixes
+
+ -- Laszlo Budai <lbudai@balabit.com>  Thu, 19 Sep 2013 14:50:55 +0200
+
 gettext (0.17-3syslogng41.1) syslogngdeps30; urgency=low
 
   * re-release for syslog-ng-deps-3.0
