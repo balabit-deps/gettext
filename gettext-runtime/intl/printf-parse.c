@@ -61,6 +61,14 @@
 # include <stdint.h>
 #endif
 
+# if defined(WIN32) && !defined(WIN64) && !defined(_MSC_VER) && !defined(HAVE_INTMAX_T)
+typedef long long int intmax_t;
+#define HAVE_INTMAX_T
+# elif defined(WIN64) && !defined(_MSC_VER) && !defined(HAVE_INTMAX_T)
+typedef long int intmax_t;
+#define HAVE_INTMAX_T
+#endif
+
 /* malloc(), realloc(), free().  */
 #include <stdlib.h>
 
