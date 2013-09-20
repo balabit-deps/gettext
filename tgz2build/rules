@@ -15,7 +15,7 @@ $(STAMPDIR)/stamp-setup:
 configure: $(STAMPDIR)/stamp-configure
 $(STAMPDIR)/stamp-configure: $(STAMPDIR)/stamp-setup
 	#we need only the runtime libs.
-	cd gettext-runtime && LDFLAGS="$(LDFLAGS)" bash ./configure $(CONFIGURE_OPTS)
+	cd gettext-runtime && LDFLAGS="$(LDFLAGS)" $(SHELL) ./configure $(CONFIGURE_OPTS)
 	touch $@
 
 
