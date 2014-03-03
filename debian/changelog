@@ -1,3 +1,9 @@
+gettext (0.17-3syslogng51.1) syslogngdeps51; urgency=low
+
+  * release for syslog-ng-deps-5.1
+
+ -- Laszlo Budai <lbudai@balabit.com>  Mon, 03 Mar 2014 11:45:52 +0100
+
 gettext (0.17-3syslogng50.1) syslogngdeps50; urgency=low
 
   * release for syslog-ng-deps-5.0
