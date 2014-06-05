@@ -1,3 +1,9 @@
+gettext (0.17-3syslogng52.1) syslogng52; urgency=low
+
+  * release for syslog-ng-5.2
+
+ -- jviktor <jviktor@devel-57>  Thu, 05 Jun 2014 14:12:22 +0200
+
 gettext (0.17-3syslogng51.1) syslogngdeps51; urgency=low
 
   * release for syslog-ng-deps-5.1
