@@ -264,7 +264,7 @@ mkdir -p m4
  ../build-aux/fixaclocal aclocal -I m4 -I ../autoconf-lib-link/m4 -I ../m4 -I gnulib-m4
  autoconf
  autoheader && touch config.h.in
- automake
+ automake --add-missing
 )
 
 echo  gettext-runtime/libasprintf
@@ -303,6 +303,6 @@ mkdir -p m4
 
 build-aux/fixaclocal aclocal
 autoconf
-automake
+automake --add-missing
 
 cp -p autoconf-lib-link/config.rpath build-aux/config.rpath
